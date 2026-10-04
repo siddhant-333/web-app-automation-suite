@@ -119,47 +119,6 @@
       "response": []
     },
     {
-      "name": "Verify Login",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"User exists\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.message).to.eql(\"User exists!\");\r\n});\r\n\r\npm.test(\"API response code is 200\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.responseCode).to.eql(200);\r\n});"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "email",
-              "value": "iamnoob@gmail.com"
-            },
-            {
-              "key": "password",
-              "value": "thisiseasy"
-            }
-          ]
-        },
-        "url": {
-          "raw": "{{baseUrl}}/verifyLogin",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "verifyLogin"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
       "name": "Create Account",
       "event": [
         {
@@ -167,7 +126,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"Status code is 400\", function () {\r\n    pm.expect(pm.response.json().responseCode).to.eql(400);\r\n});\r\n\r\npm.test(\"Email already exists message is returned\", function () {\r\n    pm.expect(pm.response.json().message).to.eql(\"Email already exists!\");\r\n});"
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.expect(pm.response.json().responseCode).to.eql(200);\r\n});\r\n\r\npm.test(\"new user created\", function () {\r\n    pm.expect(pm.response.json().message).to.eql(\"new user created\");\r\n});"
             ]
           }
         }
@@ -184,11 +143,11 @@
             },
             {
               "key": "email",
-              "value": "sdaxigDYU@gmail.com"
+              "value": "sdaxigDYUo@gmail.com"
             },
             {
               "key": "password",
-              "value": "wdqivqouii"
+              "value": "wdqivqouiii"
             },
             {
               "key": "title",
@@ -265,36 +224,64 @@
       "response": []
     },
     {
-      "name": "delete account",
+      "name": "Verify Login",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Account is deleted successfully\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.responseCode).to.eql(200);\r\n    pm.expect(jsonData.message).to.eql(\"Account deleted!\");\r\n});"
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"User exists\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.message).to.eql(\"User exists!\");\r\n});\r\n\r\npm.test(\"API response code is 200\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.responseCode).to.eql(200);\r\n});"
             ]
           }
         }
       ],
       "request": {
-        "method": "DELETE",
+        "method": "POST",
         "header": [],
         "body": {
           "mode": "urlencoded",
           "urlencoded": [
             {
               "key": "email",
-              "value": "iamnoob@gmail.com"
+              "value": "sdaxigDYUo@gmail.com"
             },
             {
               "key": "password",
-              "value": "thisiseasy"
+              "value": "wdqivqouiii"
             }
           ]
         },
         "url": {
-          "raw": "https://automationexercise.com/api/deleteAccount",
+          "raw": "{{baseUrl}}/verifyLogin",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "verifyLogin"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get User Detail By Email",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response code is 200\", function () {\r\n    pm.expect(pm.response.json().responseCode).to.eql(200);\r\n});\r\n\r\npm.test(\"User details are returned\", function () {\r\n    pm.expect(pm.response.json().user).to.exist;\r\n});\r\n\r\npm.test(\"User email matches requested email\", function () {\r\n    pm.expect(pm.response.json().user.email).to.eql(\"sdaxigDYUo@gmail.com\");\r\n});\r\n\r\npm.test(\"User name is present\", function () {\r\n    pm.expect(pm.response.json().user.name).to.not.be.empty;\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://automationexercise.com/api/getUserDetailByEmail?email=sdaxigDYUo@gmail.com",
           "protocol": "https",
           "host": [
             "automationexercise",
@@ -302,7 +289,13 @@
           ],
           "path": [
             "api",
-            "deleteAccount"
+            "getUserDetailByEmail"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "sdaxigDYUo@gmail.com"
+            }
           ]
         }
       },
@@ -316,7 +309,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response code is 200\", function () {\r\n    pm.expect(pm.response.json().responseCode).to.eql(200);\r\n});"
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Account was updated successfully\", function () {\r\n    pm.expect(pm.response.json().message).to.eql(\"User updated!\");\r\n});"
             ]
           }
         }
@@ -353,23 +346,36 @@
       "response": []
     },
     {
-      "name": "Get User Detail By Email",
+      "name": "delete account",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response code is 200\", function () {\r\n    pm.expect(pm.response.json().responseCode).to.eql(200);\r\n});\r\n\r\npm.test(\"User details are returned\", function () {\r\n    pm.expect(pm.response.json().user).to.exist;\r\n});\r\n\r\npm.test(\"User email matches requested email\", function () {\r\n    pm.expect(pm.response.json().user.email).to.eql(\"sdaxigDYU@gmail.com\");\r\n});\r\n\r\npm.test(\"User name is present\", function () {\r\n    pm.expect(pm.response.json().user.name).to.not.be.empty;\r\n});"
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Account is deleted successfully\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.responseCode).to.eql(200);\r\n    pm.expect(jsonData.message).to.eql(\"Account deleted!\");\r\n});"
             ]
           }
         }
       ],
       "request": {
-        "method": "GET",
+        "method": "DELETE",
         "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "sdaxigDYUo@gmail.com"
+            },
+            {
+              "key": "password",
+              "value": "wdqivqouiii"
+            }
+          ]
+        },
         "url": {
-          "raw": "https://automationexercise.com/api/getUserDetailByEmail?email=sdaxigDYU@gmail.com",
+          "raw": "https://automationexercise.com/api/deleteAccount",
           "protocol": "https",
           "host": [
             "automationexercise",
@@ -377,13 +383,7 @@
           ],
           "path": [
             "api",
-            "getUserDetailByEmail"
-          ],
-          "query": [
-            {
-              "key": "email",
-              "value": "sdaxigDYU@gmail.com"
-            }
+            "deleteAccount"
           ]
         }
       },
