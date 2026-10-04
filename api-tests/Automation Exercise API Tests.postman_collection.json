@@ -1,0 +1,393 @@
+{
+  "info": {
+    "_postman_id": "e94ca36b-98e7-42f1-a6c7-881731c8bc46",
+    "name": "Automation Exercise API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57999419",
+    "_collection_link": "https://go.postman.co/collection/57999419-e94ca36b-98e7-42f1-a6c7-881731c8bc46?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get All Products",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\npm.test(\"Products are returned\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.products.length).to.be.greaterThan(0);\r\n});\r\nconst jsonData = pm.response.json();\r\npm.expect(jsonData.responseCode).to.eql(200);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productsList"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get all brands",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\npm.test(\"Brands are returned\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.brands.length).to.be.greaterThan(0);\r\n});\r\npm.test(\"API response code is 200\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.responseCode).to.eql(200);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/brandsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "brandsList"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search Product",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Products are returned\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.products.length).to.be.greaterThan(0);\r\n});\r\npm.test(\"API response code is 200\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.responseCode).to.eql(200);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "search_product",
+              "value": "top"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/searchProduct",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "searchProduct"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Product Details",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productDetail/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productDetail",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Verify Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"User exists\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.message).to.eql(\"User exists!\");\r\n});\r\n\r\npm.test(\"API response code is 200\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.responseCode).to.eql(200);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "iamnoob@gmail.com"
+            },
+            {
+              "key": "password",
+              "value": "thisiseasy"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/verifyLogin",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "verifyLogin"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Account",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {\r\n    pm.expect(pm.response.json().responseCode).to.eql(400);\r\n});\r\n\r\npm.test(\"Email already exists message is returned\", function () {\r\n    pm.expect(pm.response.json().message).to.eql(\"Email already exists!\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "Test User"
+            },
+            {
+              "key": "email",
+              "value": "sdaxigDYU@gmail.com"
+            },
+            {
+              "key": "password",
+              "value": "wdqivqouii"
+            },
+            {
+              "key": "title",
+              "value": "mr."
+            },
+            {
+              "key": "birth_date",
+              "value": "07/08/2000"
+            },
+            {
+              "key": "birth_month",
+              "value": "8"
+            },
+            {
+              "key": "birth_year",
+              "value": "2000"
+            },
+            {
+              "key": "firstname",
+              "value": "dcbsdqw"
+            },
+            {
+              "key": "lastname",
+              "value": "fesferfre"
+            },
+            {
+              "key": "phone",
+              "value": "476382678"
+            },
+            {
+              "key": "address1",
+              "value": "acesa"
+            },
+            {
+              "key": "address2",
+              "value": "dac"
+            },
+            {
+              "key": "city",
+              "value": "scxAq"
+            },
+            {
+              "key": "state",
+              "value": "Szc"
+            },
+            {
+              "key": "zipcode",
+              "value": "CSACS"
+            },
+            {
+              "key": "country",
+              "value": "CzsCZA"
+            },
+            {
+              "key": "company",
+              "value": "C XZCSD"
+            },
+            {
+              "key": "mobile_number",
+              "value": "89783971973912"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/createAccount",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "createAccount"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete account",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Account is deleted successfully\", function () {\r\n    const jsonData = pm.response.json();\r\n    pm.expect(jsonData.responseCode).to.eql(200);\r\n    pm.expect(jsonData.message).to.eql(\"Account deleted!\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "iamnoob@gmail.com"
+            },
+            {
+              "key": "password",
+              "value": "thisiseasy"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://automationexercise.com/api/deleteAccount",
+          "protocol": "https",
+          "host": [
+            "automationexercise",
+            "com"
+          ],
+          "path": [
+            "api",
+            "deleteAccount"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update User Account",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response code is 200\", function () {\r\n    pm.expect(pm.response.json().responseCode).to.eql(200);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "sdaxigDYU@gmail.com"
+            },
+            {
+              "key": "password",
+              "value": "wdqivqouii"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://automationexercise.com/api/updateAccount",
+          "protocol": "https",
+          "host": [
+            "automationexercise",
+            "com"
+          ],
+          "path": [
+            "api",
+            "updateAccount"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get User Detail By Email",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response code is 200\", function () {\r\n    pm.expect(pm.response.json().responseCode).to.eql(200);\r\n});\r\n\r\npm.test(\"User details are returned\", function () {\r\n    pm.expect(pm.response.json().user).to.exist;\r\n});\r\n\r\npm.test(\"User email matches requested email\", function () {\r\n    pm.expect(pm.response.json().user.email).to.eql(\"sdaxigDYU@gmail.com\");\r\n});\r\n\r\npm.test(\"User name is present\", function () {\r\n    pm.expect(pm.response.json().user.name).to.not.be.empty;\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://automationexercise.com/api/getUserDetailByEmail?email=sdaxigDYU@gmail.com",
+          "protocol": "https",
+          "host": [
+            "automationexercise",
+            "com"
+          ],
+          "path": [
+            "api",
+            "getUserDetailByEmail"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "sdaxigDYU@gmail.com"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
