@@ -17,7 +17,7 @@ So far, I've been working on things like:
 * Generating test reports
 * Using Git and GitHub to manage my work
 
-I'm trying to make my tests check more than just whether an API returns `200`. I also want to make sure the response contains the **correct information**.
+I'm trying to make my tests check more than just whether an API returns "200". I also want to make sure the response contains the **correct information**.
 
 Project Structure
 
@@ -37,7 +37,7 @@ web-app-automation-suite/
 
 The main focus right now is the "API testing" part of the project.
 
-I'm building this step by step as I learn. Later, I plan to add **UI automation with Playwright and TypeScrip Why I'm Building This
+I'm building this step by step as I learn. Later, I plan to add UI automation with Playwright and TypeScrip Why I'm Building This
 
 I wanted to learn automation by actually building and testing something instead of only following tutorials.
 
