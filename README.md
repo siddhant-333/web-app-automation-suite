@@ -17,7 +17,7 @@ So far, I've been working on things like:
 * Generating test reports
 * Using Git and GitHub to manage my work
 
-I'm trying to make my tests check more than just whether an API returns "200". I also want to make sure the response contains the **correct information**.
+I'm trying to make my tests check more than just whether an API returns "200". I also want to make sure the response contains the "correct information".
 
 Project Structure
 
@@ -25,14 +25,18 @@ Project Structure
 web-app-automation-suite/
 
 1.api-tests/
-     Postman Collection
-     Postman Environment
-     Newman Report
+     
+Postman Collection,
+Postman Environment,
+Newman Report,
 
 2.ui-tests/
+
 3.docs/
-4. .github/
-5. README.md
+
+4..github/
+
+5.README.md
 
 
 The main focus right now is the "API testing" part of the project.
